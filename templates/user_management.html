@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>User Management</h1>
+    <p><a href="{{ url_for('admin_home') }}">Back to Admin Home</a></p>
+    <hr>
+
+    {% if success %}
+        <p style="color: green;">{{ success }}</p>
+    {% endif %}
+    
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    <h2>Add New User</h2>
+    <form method="POST" action="{{ url_for('user_management') }}">
+        
+        <label for="user_id">User ID (Unique):</label>
+        <input type="text" id="user_id" name="user_id" required><br><br>
+
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        
+        <label for="is_active">Status:</label>
+        <input type="checkbox" id="is_active" name="is_active" value="1" checked>
+        <label for="is_active">Active (Uncheck for Inactive)</label><br><br>
+
+        <label for="is_admin">Role:</label>
+        <input type="checkbox" id="is_admin" name="is_admin" value="1">
+        <label for="is_admin">Admin (Check if Admin)</label><br><br>
+
+        <button type="submit">Create User</button>
+    </form>
+    
+    <hr>
+    <h2>Update Existing User (Pending)</h2>
+    <p>The form to update existing user details will be added here later.</p>
+</body>
+</html>

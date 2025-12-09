@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Return Item</title>
+    <style>
+        .error { color: red; }
+        .success { color: green; }
+        .fine { color: orange; font-weight: bold; }
+        
+    </style>
+</head>
+<body>
+    <h1>Return Book / Movie</h1>
+    <p><a href="{{ url_for('admin_home') }}">Back to Admin Home</a></p>
+    <hr>
+    
+    {% if success %}
+        <p class="success">{{ success }}</p>
+    {% endif %}
+    
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+    
+    {% if fine_calculated is not none %}
+        <div class="fine">
+            <p>Fine Calculated: ₹ {{ '%.2f' | format(fine_calculated) }}</p>
+            <p>Status: *Item is Overdue.*</p>
+        </div>
+    {% endif %}
+
+    <form method="POST" action="{{ url_for('return_item') }}">
+        
+        <label for="serial_no">Item Serial No.:</label>
+        <input type="text" id="serial_no" name="serial_no" value="{{ serial_no_form or '' }}" required><br><br>
+
+        <label for="membership_id">Membership ID:</label>
+        <input type="text" id="membership_id" name="membership_id" value="{{ membership_id_form or '' }}" required><br><br>
+
+        <label for="return_date_actual">Actual Return Date:</label>
+        <input type="date" id="return_date_actual" name="return_date_actual" value="{{ current_date }}" required><br><br>
+        
+        <input type="hidden" name="fine_amount" value="{{ fine_calculated or 0.0 }}">
+        
+        <button type="submit" name="action" value="check">Check Item & Fine</button>
+        <button type="submit" name="action" value="return" {% if not fine_calculated and fine_calculated != 0.0 %}disabled{% endif %}>Finalize Return</button>
+    </form>
+</body>
+</html>

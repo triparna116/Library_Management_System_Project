@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Membership</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Add New Membership</h1>
+    <p><a href="{{ url_for('admin_home') }}">Back to Admin Home</a></p>
+    <hr>
+    
+    {% if success %}
+        <p style="color: green;">{{ success }}</p>
+    {% endif %}
+    
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST" action="{{ url_for('add_membership') }}">
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name" required><br><br>
+
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" required><br><br>
+
+        <label for="contact_number">Contact Number:</label>
+        <input type="text" id="contact_number" name="contact_number" required><br><br>
+
+        <label for="contact_address">Contact Address:</label><br>
+        <textarea id="contact_address" name="contact_address" rows="4" required></textarea><br><br>
+
+        <label for="aadhar_card_no">Aadhar Card No:</label>
+        <input type="text" id="aadhar_card_no" name="aadhar_card_no" required><br><br>
+
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date" value="{{ current_date }}" required><br><br>
+        
+        <label>Membership Duration:</label><br>
+        <input type="radio" id="6_months" name="membership_duration" value="6_months" checked>
+        <label for="6_months">6 Months</label><br>
+        
+        <input type="radio" id="1_year" name="membership_duration" value="1_year">
+        <label for="1_year">1 Year</label><br>
+
+        <input type="radio" id="2_years" name="membership_duration" value="2_years">
+        <label for="2_years">2 Years</label><br><br>
+
+        <button type="submit">Add Membership</button>
+    </form>
+</body>
+</html>

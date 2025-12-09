@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Issue Book</title>
+    <style>
+        .error { color: red; }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+    <h1>Issue Book / Movie</h1>
+    <p><a href="{{ url_for('admin_home') }}">Back to Admin Home</a></p>
+    <hr>
+    
+    {% if success %}
+        <p class="success">{{ success }}</p>
+    {% endif %}
+    
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST" action="{{ url_for('issue_book') }}">
+        
+        <label for="membership_id">Membership ID:</label>
+        <input type="text" id="membership_id" name="membership_id" required><br><br>
+
+        <label for="serial_no">Book/Movie Serial No.:</label>
+        <input type="text" id="serial_no" name="serial_no" required><br><br>
+        
+        <label for="issue_date">Issue Date:</label>
+        <input type="date" id="issue_date" name="issue_date" value="{{ current_date }}" required><br><br>
+        
+        <label for="return_date_due">Due Return Date:</label>
+        <input type="date" id="return_date_due" name="return_date_due" value="{{ return_date_default }}" required><br><br>
+        
+        <label for="remarks">Remarks (Optional):</label><br>
+        <textarea id="remarks" name="remarks" rows="3"></textarea><br><br>
+
+        <button type="submit">Issue Item</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Availability</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Transactions > Book Availability</h1>
+    <p>
+        {% if session.get('is_admin') == 1 %}
+            <a href="{{ url_for('admin_home') }}">Home</a>
+        {% else %}
+            <a href="{{ url_for('user_home') }}">Home</a>
+        {% endif %}
+        | <a href="{{ url_for('logout') }}">Log Out</a>
+    </p>
+    <hr>
+    
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST">
+        <h2>Search for Book/Movie</h2>
+        <p>Please enter a Book Name or the Author Name.</p>
+
+        <label for="book_name">Enter Book/Movie Name*:</label>
+        <input type="text" id="book_name" name="book_name" list="item_names_list">
+        <datalist id="item_names_list">
+            {% for name in item_names %}
+                <option value="{{ name }}">
+            {% endfor %}
+        </datalist>
+        <br><br>
+
+        <label for="author_name">Enter Author/Director*:</label>
+        <input type="text" id="author_name" name="author_name" list="item_authors_list">
+        <datalist id="item_authors_list">
+            {% for author in item_authors %}
+                <option value="{{ author }}">
+            {% endfor %}
+        </datalist>
+        <br><br>
+        
+        <button type="submit">Search Availability</button>
+    </form>
+</body>
+</html>
